@@ -1,1 +1,149 @@
+/* General Body Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Cambria', Times, serif;
+    background-color: #f9f9f9;
+    line-height: 1.6;
+    color: #333;
+    text-align: center; /* Center aligns the header */
+}
 
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Header */
+h1 {
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Chatbox Styles */
+#chatbox {
+    margin: 20px auto;
+    max-width: 600px;
+    min-height: 300px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+}
+
+/* Chat Messages */
+.chatbot-message, .user-message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 75%;
+    word-wrap: break-word;
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* Bot Message (Left-Aligned) */
+.chatbot-message {
+    background-color: #e0f7fa;
+    text-align: left;
+    float: left;
+    clear: both;
+    margin-right: auto;
+}
+
+/* User Message (Right-Aligned) */
+.user-message {
+    background-color: #76c7e7;
+    text-align: right;
+    float: right;
+    clear: both;
+    margin-left: auto;
+}
+
+/* Interaction Form Styles */
+form {
+    margin-top: 20px;
+    text-align: left; /* Aligns the form elements to the left */
+    display: block;
+}
+
+/* Left-Aligned Labels */
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Textarea for Job Description */
+textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Cambria', Times, serif;
+    resize: none;
+}
+
+/* File Input */
+input[type="file"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+/* Submit Button */
+button {
+    display: block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #2e79c9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #5594d6;
+}
+
+/* Scan Another Resume Button */
+.scan-another-btn {
+    background-color: #1948e0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.scan-another-btn:hover {
+    background-color: #218838;
+}
+
+/* Clear Floating Elements */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
