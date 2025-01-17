@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Resume Analyzer</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Analyzer</h1>
+        <div id="chatbox">
+            <div class="chatbot-message">
+                <p>Hi there! I'm here to analyze your resume and give you an ATS score. Let’s get started!</p>
+            </div>
+        </div>
+        <form id="uploadForm">
+            <label for="job_description">Job Description:</label>
+            <textarea id="job_description" name="job_description" rows="4" placeholder="Paste the job description here" required></textarea>
+            <label for="file">Upload Your Resume (PDF or TXT):</label>
+            <input type="file" id="file" name="file" accept=".pdf, .txt" required>
+            <button type="submit">Analyze</button>
+        </form>
+    </div>
 
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const chatbox = document.getElementById('chatbox');
+            const formData = new FormData(this);
+
+            // Add a loading message
+            const loadingMessage = document.createElement('div');
+            loadingMessage.classList.add('chatbot-message');
+            loadingMessage.innerHTML = '<p>Analyzing your resume...</p>';
+            chatbox.appendChild(loadingMessage);
+
+            try {
+                // Send request to the server
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+
+                // Remove loading message
+                chatbox.removeChild(loadingMessage);
+
+                if (data.error) {
+                    // Display error message
+                    const errorMessage = document.createElement('div');
+                    errorMessage.classList.add('chatbot-message');
+                    errorMessage.innerHTML = `<p>${data.error}</p>`;
+                    chatbox.appendChild(errorMessage);
+                } else {
+                    // Display ATS score analysis
+                    const resultMessage = document.createElement('div');
+                    resultMessage.classList.add('chatbot-message');
+                    resultMessage.innerHTML = `
+                        <p>Here's your ATS Score Analysis:</p>
+                        <p><strong>Match Percentage:</strong> ${data.match_percentage.toFixed(2)}%</p>
+                        <p><strong>Weighted Score:</strong> ${data.weighted_score.toFixed(2)}%</p>
+                        <p><strong>Matching Keywords:</strong> ${Array.from(data.matches).join(', ')}</p>
+                        <p><strong>Missing Keywords:</strong> ${Array.from(data.missing_words).join(', ')}</p>
+                        <button id="scanAnother" class="scan-another-btn">Scan Another Resume</button>
+                    `;
+                    chatbox.appendChild(resultMessage);
+
+                    // Add event listener for "Scan Another Resume"
+                    document.getElementById('scanAnother').addEventListener('click', () => {
+                        window.location.reload();
+                    });
+                }
+            } catch (err) {
+                // Remove loading message
+                chatbox.removeChild(loadingMessage);
+
+                // Display general error message
+                const errorMessage = document.createElement('div');
+                errorMessage.classList.add('chatbot-message');
+                errorMessage.innerHTML = `<p>Something went wrong while analyzing your resume. Please try again.</p>`;
+                chatbox.appendChild(errorMessage);
+            }
+        });
+    </script>
+</body>
+</html>

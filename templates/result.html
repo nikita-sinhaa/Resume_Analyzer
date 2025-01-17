@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Result</title>
+</head>
+<body>
+    <h1>Scan Result</h1>
+    <p>Match Percentage: {{ match_percentage }}%</p>
+    <h2>Matching Keywords:</h2>
+    <ul>
+        {% for word in matches %}
+        <li>{{ word }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Missing Keywords from Job Description:</h2>
+    <ul>
+        {% for word in missing_words %}
+        <li>{{ word }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('index') }}">Scan Another</a>
+</body>
+</html>
